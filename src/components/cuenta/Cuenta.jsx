@@ -33,9 +33,9 @@ const Cuenta = ()=>{
 
             <Box ml='35vw' display='flex' flexDirection='row' flexWrap='wrap' justifyContent='space-between' mt='5vh' alignItems='center' width='30vw' h='10vh'>
                 <Button  width='11vw' h='4vh' colorScheme='orange' onClick={()=>{handleRedirect('/nuevoAnalisis')}}>Nuevo análisis</Button>
-                <Button  width='11vw' h='4vh' colorScheme='orange' >Nueva visualización</Button>
-                <Button  width='11vw' h='4vh' colorScheme='orange' mt='3vh' onClick={()=>{handleRedirect('/analisisExistentes')}}>Análisis existentes</Button>
-                <Button  width='11vw' h='4vh' colorScheme='orange' mt='3vh' onClick={()=>{handleRedirect('/visualizacionesExistentes')}}>Visualizaciones existentes</Button>
+              
+                <Button  width='11vw' h='4vh' colorScheme='orange' onClick={()=>{handleRedirect('/analisisExistentes')}}>Análisis existentes</Button>
+                
             </Box>
 
 

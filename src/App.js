@@ -1,4 +1,3 @@
-
 import { Route, Routes} from 'react-router-dom';
 import LandPage from './components/landPage/Landpage';
 import InicioSesion from './components/inicioSesion/InicioSesion';

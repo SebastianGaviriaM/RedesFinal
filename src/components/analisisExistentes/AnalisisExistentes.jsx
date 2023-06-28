@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Icon, Heading, Button, Text, Input, Image} from '@chakra-ui/react';
 import { useNavigate } from "react-router-dom";
 import estrella from '../../assets/estrella.png'
 
 const AnalisisExistentes = ()=>{
 
+    let listaTwits;
+    let listaImagenes;
+
+    useEffect(()=>{
+        const twits = localStorage.getItem('twits');
+        listaTwits = twits ? JSON.parse(twits) : [];
+
+        const imagenes = localStorage.getItem('imagenes');
+        listaImagenes = imagenes ? JSON.parse(imagenes) : [];
+
+        
+    }, [])
+    if(listaTwits===undefined){
+        listaTwits=[];
+    }
     const navigate = useNavigate();
+
+    
 
     const handleRedirect =()=>{
         navigate('/cuenta');
@@ -23,6 +40,16 @@ const AnalisisExistentes = ()=>{
 
 
         <Box mt='30vh' display='flex' w='70vw' ml='15vw' justifyContent='space-evenly'>
+
+            {listaTwits.map((element, index) => {
+                return (
+                    <Box key={index} display='flex' flexDirection='column' alignItems='center'>
+                    <Image src={estrella} w='5vw' />
+                    <Heading size='lg'>{element}</Heading>
+                    </Box>
+                );
+                })}
+
             <Box display='flex' flexDirection='column' alignItems='center'>
                 <Image src={estrella} w='5vw'></Image>
                 <Heading size='lg'>Analisis 1</Heading>

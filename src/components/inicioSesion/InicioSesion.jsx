@@ -20,7 +20,8 @@ const InicioSesion = ()=>{
 
 
     const handleSendInicioSesion = ()=>{
-        localStorage.setItem('correo', correo);
+        localStorage.setItem('twits', []);
+        localStorage.setItem('imagenes', []);
         navigate('/cuenta');
     }
 
