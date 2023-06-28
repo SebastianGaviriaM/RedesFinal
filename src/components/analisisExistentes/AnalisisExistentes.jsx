@@ -1,25 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Icon, Heading, Button, Text, Input, Image} from '@chakra-ui/react';
 import { useNavigate } from "react-router-dom";
-import estrella from '../../assets/estrella.png'
+import estrella from '../../content/mi_grafico0.png'
 
 const AnalisisExistentes = ()=>{
 
-    let listaTwits;
-    let listaImagenes;
+    const [listaTwits, setListaTwits] = useState([]);
+    const [listaImagenes, setListaImagenes] = useState([]);
 
     useEffect(()=>{
         const twits = localStorage.getItem('twits');
-        listaTwits = twits ? JSON.parse(twits) : [];
+        const parsedTwits = twits ? JSON.parse(twits) : [];
+        setListaTwits(parsedTwits);
 
         const imagenes = localStorage.getItem('imagenes');
-        listaImagenes = imagenes ? JSON.parse(imagenes) : [];
-
+        const parsedImagenes =  imagenes ? JSON.parse(imagenes) : [];
+        setListaImagenes(parsedImagenes);
         
     }, [])
-    if(listaTwits===undefined){
-        listaTwits=[];
-    }
+
+
+
     const navigate = useNavigate();
 
     
@@ -41,38 +42,16 @@ const AnalisisExistentes = ()=>{
 
         <Box mt='30vh' display='flex' w='70vw' ml='15vw' justifyContent='space-evenly'>
 
-            {listaTwits.map((element, index) => {
+            {listaTwits.length>0 && listaTwits.map((element, index) => {
+
+                const imageUrl = require(`../../content/mi_grafico${listaImagenes[index]}.png`);
                 return (
                     <Box key={index} display='flex' flexDirection='column' alignItems='center'>
-                    <Image src={estrella} w='5vw' />
+                    <Image src={imageUrl} w='5vw' />
                     <Heading size='lg'>{element}</Heading>
                     </Box>
                 );
                 })}
-
-            <Box display='flex' flexDirection='column' alignItems='center'>
-                <Image src={estrella} w='5vw'></Image>
-                <Heading size='lg'>Analisis 1</Heading>
-            </Box>
-            <Box display='flex' flexDirection='column' alignItems='center'>
-                <Image src={estrella} w='5vw' ></Image>
-                <Heading size='lg'>Analisis 2</Heading>
-            </Box>
-            <Box display='flex' flexDirection='column' alignItems='center'>
-                <Image src={estrella} w='5vw'></Image>
-                <Heading size='lg'>Analisis 3</Heading>
-                
-            </Box>
-            <Box display='flex' flexDirection='column' alignItems='center'>
-                <Image src={estrella} w='5vw'></Image>
-                <Heading size='lg'>Analisis 4</Heading>
-                
-            </Box>
-            <Box display='flex' flexDirection='column' alignItems='center'>
-                <Image src={estrella} w='5vw'></Image>
-                <Heading size='lg'>Analisis 5</Heading>
-                
-            </Box>
 
         </Box>
         <Button width='6vw' ml='47vw' mt='5vh'>Eliminar</Button>
