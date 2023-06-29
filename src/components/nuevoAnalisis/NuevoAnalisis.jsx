@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Box, Heading, Button, Text, Input, Spinner} from '@chakra-ui/react';
+import { Box, Heading, Button, Text, Input, Spinner, Image} from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -8,6 +8,8 @@ const NuevoAnalisis = () =>{
     const [contador, setContador] = useState(0);
     const [activado, setActivado] = useState(false);
     const [busqueda, setBusqueda] = useState(false);
+    const [activarImagen, setActivarImagen] = useState(false);
+    const [imagenURL, setImagenURL] = useState('');
 
     const [inputmens, setInputmens] = useState('');
 
@@ -29,6 +31,8 @@ const NuevoAnalisis = () =>{
             setActivado(false);
             setTexto('Recolectando los tweets...')
             setBusqueda(false);
+            setActivarImagen(true);
+            
         }, 15000);
         }
 
@@ -58,6 +62,13 @@ const NuevoAnalisis = () =>{
         const listaImagenes = imagenes ? JSON.parse(imagenes) : [];
         listaImagenes.push(randomNumber);
         localStorage.setItem('imagenes', JSON.stringify(listaImagenes));
+
+        
+        setImagenURL(require(`../../content/mi_grafico${randomNumber}.png`));
+
+        setActivarImagen(false);
+
+
     };
 
     const handleChange = (event)=>{
@@ -89,6 +100,9 @@ const NuevoAnalisis = () =>{
             <Box w='10vw' ml='45vw' display={!busqueda ? 'none' : 'flex'} flexDirection='column' alignItems='center'  >
                 <Spinner mt='5vh' width='2vw' height='2vw'/>
                 <Text>{texto}</Text>
+            </Box>
+            <Box>
+                <Image src={imagenURL} w='30vw' ml='35vw' mt='5vh' h='15vw' display={activarImagen ? 'block' : 'none'} />
             </Box>
             
         </Box>
